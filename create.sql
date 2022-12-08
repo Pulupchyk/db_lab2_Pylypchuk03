@@ -6,10 +6,21 @@ CREATE TABLE brands (
 CREATE TABLE laptops (
     brand_id INTEGER NOT NULL,
     laptop_id INTEGER NOT NULL,
-    laptop_name VARCHAR(50) NOT NULL,
-    discount_price FLOAT NOT NULL,
-    old_price FLOAT NOT NULL,
-    ratings_5max FLOAT NOT NULL
+    laptop_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE prices(
+	laptop_id INTEGER NOT NULL,
+	discount_price FLOAT NOT NULL,
+	d_change_dis DATE NOT NULL, 
+	old_price FLOAT NOT NULL,
+	d_change_old DATE NOT NULL
+); 
+
+CREATE TABLE ratings(
+	laptop_id INTEGER NOT NULL,
+	ratings_5max FLOAT NOT NULL,
+	d_change_rgs DATE NOT NULL 
 );
 
 CREATE TABLE details (
@@ -31,3 +42,10 @@ FOREIGN KEY(brand_id) REFERENCES brands(brand_id);
 
 ALTER TABLE details ADD CONSTRAINT FK_details_laptop
 FOREIGN KEY(laptop_id) REFERENCES laptops(laptop_id);
+
+ALTER TABLE prices ADD CONSTRAINT FK_prices_laptop
+FOREIGN KEY(laptop_id) REFERENCES laptops(laptop_id);
+
+ALTER TABLE ratings ADD CONSTRAINT FK_ratings_laptop
+FOREIGN KEY(laptop_id) REFERENCES laptops(laptop_id);
+

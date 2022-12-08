@@ -11,18 +11,18 @@ query_1 = '''
     Select brand_name, Count(laptops.brand_id) as "quantity" from laptops 
     INNER JOIN brands ON brands.brand_id = laptops.brand_id
     group by brand_name, laptops.brand_id
-    order by count(laptops.brand_id) desc
+    order by count(laptops.brand_id) desc;
 '''
 
 query_2 = '''
-    Select 'Do not have' as "Discounts", count(discount_price) from laptops where discount_price = old_price union
-    Select 'Have', count(discount_price) from laptops where discount_price < old_price
+    Select 'Do not have' as "Discounts", count(discount_price) from prices where discount_price = old_price union
+    Select 'Have', count(discount_price) from prices where discount_price < old_price;
     '''
 
 query_3 = '''
-    Select ratings_5max, Count(ratings_5max) as "quantity" from laptops
+    Select Count(ratings_5max), ratings_5max as "quantity" from ratings
     group by ratings_5max 
-    order by count(ratings_5max) desc
+    order by count(ratings_5max) desc;
 '''
 
 conn = psycopg2.connect(user=username, password=password, dbname=database, host=host, port=port)
@@ -70,8 +70,8 @@ with conn:
         nofr.append(row[1])
     
     graph_ax.plot(rating, nofr, marker='o')
-    graph_ax.set_xlabel('rating')
-    graph_ax.set_ylabel('number of ratings')
+    graph_ax.set_xlabel('number of ratings')
+    graph_ax.set_ylabel('rating')
     graph_ax.set_title('Rating of laptops')
 
     for y, g_r in zip(rating, nofr):
