@@ -19,7 +19,7 @@ query_2 = '''
     '''
 
 query_3 = '''
-    Select Count(ratings_5max), ratings_5max as "quantity" from ratings
+    Select Count(ratings_5max) as "quantity", ratings_5max from ratings
     group by ratings_5max 
     order by count(ratings_5max) desc;
 '''

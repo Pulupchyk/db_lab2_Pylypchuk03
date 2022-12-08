@@ -6,6 +6,6 @@ order by count(laptops.brand_id) desc;
 Select 'Do not have' as "Discounts", count(discount_price) from prices where discount_price = old_price union
 Select 'Have', count(discount_price) from prices where discount_price < old_price;
 
-Select Count(ratings_5max), ratings_5max as "quantity" from ratings
+Select Count(ratings_5max) as "quantity", ratings_5max from ratings
 group by ratings_5max 
 order by count(ratings_5max) desc;
