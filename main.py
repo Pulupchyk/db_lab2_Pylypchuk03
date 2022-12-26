@@ -19,9 +19,9 @@ query_2 = '''
     '''
 
 query_3 = '''
-    Select Count(ratings_5max) as "quantity", ratings_5max from ratings
-    group by ratings_5max 
-    order by count(ratings_5max) desc;
+    Select laptops.laptop_id, ratings_5max from laptops
+    INNER JOIN ratings ON ratings.laptop_id = laptops.laptop_id 
+    Where ratings_5max != '0'
 '''
 
 conn = psycopg2.connect(user=username, password=password, dbname=database, host=host, port=port)
